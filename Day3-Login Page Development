@@ -1,0 +1,131 @@
+-------Login.jsx-------
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log('User Logged In:', formData);
+    navigate('/dashboard');
+  };
+  return (
+    <div style={styles.container}>
+      <form onSubmit={handleLogin} style={styles.form}>
+        <h2 style={styles.title}>Login</h2>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={styles.input}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          style={styles.input}
+          required
+        />
+        <button type="submit" style={styles.button}>Login</button>
+        <p style={styles.text}>
+          Don’t have an account?{' '}
+          <button type="button" onClick={() => navigate('/register')} style={styles.linkButton}>
+            Register
+          </button>
+        </p>
+      </form>
+    </div>
+  );
+};
+const styles = {
+  container: {
+    display: 'flex',
+    height: '100vh',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f3f4f6',
+    padding: '1rem',
+  },
+  form: {
+    backgroundColor: '#fff',
+    padding: '2rem 2.5rem',
+    borderRadius: '10px',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+    width: '100%',
+    maxWidth: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  title: {
+    marginBottom: '1.5rem',
+    textAlign: 'center',
+    fontSize: '1.8rem',
+    color: '#333',
+  },
+  input: {
+    padding: '0.75rem 1rem',
+    marginBottom: '1rem',
+    fontSize: '1rem',
+    borderRadius: '6px',
+    border: '1px solid #ccc',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  },
+  button: {
+    padding: '0.75rem 1rem',
+    backgroundColor: '#4f46e5',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    marginTop: '0.5rem',
+  },
+  text: {
+    marginTop: '1rem',
+    textAlign: 'center',
+    fontSize: '0.95rem',
+    color: '#555',
+  },
+  linkButton: {
+    background: 'none',
+    border: 'none',
+    color: '#4f46e5',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    padding: 0,
+  },
+};
+export default Login;
+
+-------App.jsx--------
+
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Dashboard from './components/Dashboard';
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
+    </Routes>
+  );
+}
+export default App;
