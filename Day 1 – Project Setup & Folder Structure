@@ -1,0 +1,13 @@
+Initialized project using `npx create-react-app billing-app`
+Installed dependencies
+npm install react-router-dom
+
+set up folder structure
+src/
+├── components/
+│   ├── Register.jsx
+│   ├── Login.jsx
+│   ├── Dashboard.jsx
+│   ├── Dashboard.css
+├── App.jsx
+├── index.js
