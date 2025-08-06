@@ -1,0 +1,8 @@
+
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
+const handleLogout = () => {
+  localStorage.removeItem('user');
+  sessionStorage.clear();
+  navigate('/login');
+};
